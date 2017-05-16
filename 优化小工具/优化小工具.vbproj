@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{989D27E0-0EEC-47CA-9F8D-0E89CF4E2ACE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>优化小工具.My.MyApplication</StartupObject>
+    <RootNamespace>优化小工具</RootNamespace>
+    <AssemblyName>SmileTool</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>D:\编程\VB\Projects\myFile\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.0.4.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SmileTool.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>SmileTool.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app_im.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SmileTool.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>SmileTool.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SmileTool.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>SmileTool.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>03B67325ECFDBEC510C3ACFED167D04013E91914</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>优化小工具_2_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>adfqerer.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>.\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.Office.Interop" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="aboutMe.Designer.vb">
+      <DependentUpon>aboutMe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="aboutMe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="BSICPlanDialog.Designer.vb">
+      <DependentUpon>BSICPlanDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BSICPlanDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CDDCommand.Designer.vb">
+      <DependentUpon>CDDCommand.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CDDCommand.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CDD_parse.Designer.vb">
+      <DependentUpon>CDD_parse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CDD_parse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckCoBCCH_BSIC.vb" />
+    <Compile Include="ConsistencyCheck.Designer.vb">
+      <DependentUpon>ConsistencyCheck.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsistencyCheck.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConvertLongitudeAndLatitude.Designer.vb">
+      <DependentUpon>ConvertLongitudeAndLatitude.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConvertLongitudeAndLatitude.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateCelFile.vb" />
+    <Compile Include="CreateCMDCommand.vb" />
+    <Compile Include="DBconDialog.Designer.vb">
+      <DependentUpon>DBconDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DBconDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistanceToolDialog.Designer.vb">
+      <DependentUpon>DistanceToolDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DistanceToolDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormatCDDlog_backgroundworker.vb" />
+    <Compile Include="HW_CDD_PARSE.Designer.vb">
+      <DependentUpon>HW_CDD_PARSE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HW_CDD_PARSE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KGET_Check.Designer.vb">
+      <DependentUpon>KGET_Check.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KGET_Check.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MakeForteFileWithSiteOrSiteDatabase.vb" />
+    <Compile Include="makeForteFilewithSite_Carrier.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="NeighborPlan.Designer.vb">
+      <DependentUpon>NeighborPlan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="NeighborPlan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="newVersionAddress.Designer.vb">
+      <DependentUpon>newVersionAddress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="newVersionAddress.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PCIPlanDialog.Designer.vb">
+      <DependentUpon>PCIPlanDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PCIPlanDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SiteDatabaseToMcomFile.vb" />
+    <Compile Include="SiteToPlanetFile.vb" />
+    <Compile Include="UtilityTools.vb" />
+    <Compile Include="VBAMacroCrack.vb" />
+    <Compile Include="WorkSheetSelection.Designer.vb">
+      <DependentUpon>WorkSheetSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSheetSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="优化小工具.Designer.vb">
+      <DependentUpon>优化小工具.vb</DependentUpon>
+    </Compile>
+    <Compile Include="优化小工具.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="aboutMe.resx">
+      <DependentUpon>aboutMe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BSICPlanDialog.resx">
+      <DependentUpon>BSICPlanDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDDCommand.resx">
+      <DependentUpon>CDDCommand.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDD_parse.resx">
+      <DependentUpon>CDD_parse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsistencyCheck.resx">
+      <DependentUpon>ConsistencyCheck.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConvertLongitudeAndLatitude.resx">
+      <DependentUpon>ConvertLongitudeAndLatitude.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBconDialog.resx">
+      <DependentUpon>DBconDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DistanceToolDialog.resx">
+      <DependentUpon>DistanceToolDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HW_CDD_PARSE.resx">
+      <DependentUpon>HW_CDD_PARSE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KGET_Check.resx">
+      <DependentUpon>KGET_Check.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NeighborPlan.resx">
+      <DependentUpon>NeighborPlan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="newVersionAddress.resx">
+      <DependentUpon>newVersionAddress.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PCIPlanDialog.resx">
+      <DependentUpon>PCIPlanDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSheetSelection.resx">
+      <DependentUpon>WorkSheetSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="优化小工具.resx">
+      <DependentUpon>优化小工具.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="aaaaaaaaa.pfx" />
+    <None Include="aaadfef.pfx" />
+    <None Include="adfqerer.pfx" />
+    <None Include="afdafee.pfx" />
+    <None Include="bbbbbbbbb.pfx" />
+    <None Include="cccde.pfx" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="优化小工具_1_TemporaryKey.pfx" />
+    <None Include="优化小工具_2_TemporaryKey.pfx" />
+    <None Include="优化小工具_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app_im.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADOX">
+      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
