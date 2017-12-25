@@ -4574,12 +4574,15 @@ Public Class CDD_parse
 
         'CLNAME           CLAL      CLSUP  CLEX  CLUSE  CLTHR  CLMAX
 
+        'G14
+        'CLNAME           CLAL      CLSUP  CLEX  CLUSE  CLTHR  CLMAX  CLABSUSE
+
         filepath = outPath & "RACLP_" & CDDTime & ".csv"
         If fso.fileExists(filepath) Then
             outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
         Else
             outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
-            outputFile.writeline("BSC" & "," & "CLNAME" & "," & "CLAL" & "," & "CLSUP" & "," & "CLEX" & "," & "CLUSE" & "," & "CLTHR" & "," & "CLMAX")
+            outputFile.writeline("BSC" & "," & "CLNAME" & "," & "CLAL" & "," & "CLSUP" & "," & "CLEX" & "," & "CLUSE" & "," & "CLTHR" & "," & "CLMAX" & "," & "CLABSUSE")
         End If
         Do While Not EOF(1)
             templine = getNowLine()
@@ -4600,10 +4603,10 @@ Public Class CDD_parse
                         'CLNAME           CLAL      CLSUP  CLEX  CLUSE  CLTHR  CLMAX
                         templine = getNowLine()
                         If Not Trim(templine) = "NONE" Then
-                            outputFile.writeLine(BSCNAME & "," & Trim(Mid(templine, 1, 17)) & "," & Trim(Mid(templine, 18, 10)) & "," & Trim(Mid(templine, 28, 7)) & "," & Trim(Mid(templine, 35, 6)) & "," & Trim(Mid(templine, 41, 7)) & "," & Trim(Mid(templine, 48, 7)) & "," & Trim(Mid(templine, 55, 8)))
+                            outputFile.writeLine(BSCNAME & "," & Trim(Mid(templine, 1, 17)) & "," & Trim(Mid(templine, 18, 10)) & "," & Trim(Mid(templine, 28, 7)) & "," & Trim(Mid(templine, 35, 6)) & "," & Trim(Mid(templine, 41, 7)) & "," & Trim(Mid(templine, 48, 7)) & "," & Trim(Mid(templine, 55, 7)) & "," & Trim(Mid(templine, 62, 10)))
                         End If
                     ElseIf UCase(Trim(templine)) <> "BSC CAPACITY LOCK ALARM DATA" And Mid(UCase(Trim(templine)), 1, 35) <> "CLNAME           CLAL      CLSUP  C" Then
-                        outputFile.writeLine(BSCNAME & "," & Trim(Mid(templine, 1, 17)) & "," & Trim(Mid(templine, 18, 10)) & "," & Trim(Mid(templine, 28, 7)) & "," & Trim(Mid(templine, 35, 6)) & "," & Trim(Mid(templine, 41, 7)) & "," & Trim(Mid(templine, 48, 7)) & "," & Trim(Mid(templine, 55, 8)))
+                        outputFile.writeLine(BSCNAME & "," & Trim(Mid(templine, 1, 17)) & "," & Trim(Mid(templine, 18, 10)) & "," & Trim(Mid(templine, 28, 7)) & "," & Trim(Mid(templine, 35, 6)) & "," & Trim(Mid(templine, 41, 7)) & "," & Trim(Mid(templine, 48, 7)) & "," & Trim(Mid(templine, 55, 7)) & "," & Trim(Mid(templine, 62, 10)))
                     End If
                 End If
             End If
@@ -4850,7 +4853,7 @@ Public Class CDD_parse
         Dim outputFile As Object
         Dim filepath As String
         Dim templine As String
-        Dim CELL As String, DLPCG As String, DLPCE As String, DLPCE2A As String, INITDLPCG As String, INITDLPCE As String, INITDLPCE2A As String
+        Dim CELL As String, DLPCG As String, DLPCE As String, DLPCE2A As String, INITDLPCG As String, INITDLPCE As String, INITDLPCE2A As String, DLPCBCCH As String
         'CELL     DLPCG     DLPCE     DLPCE2A   INITDLPCG  INITDLPCE  INITDLPCE2A
         CELL = ""
         DLPCG = ""
@@ -4859,13 +4862,119 @@ Public Class CDD_parse
         INITDLPCG = ""
         INITDLPCE = ""
         INITDLPCE2A = ""
+        DLPCBCCH = ""
 
         filepath = outPath & "RFPCP_" & CDDTime & ".csv"
         If fso.fileExists(filepath) Then
             outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
         Else
             outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
-            outputFile.writeline("BSC" & "," & "CELL" & "," & "DLPCG" & "," & "DLPCE" & "," & "DLPCE2A" & "," & "INITDLPCG" & "," & "INITDLPCE" & "," & "INITDLPCE2A")
+            outputFile.writeline("BSC" & "," & "CELL" & "," & "DLPCG" & "," & "DLPCE" & "," & "DLPCE2A" & "," & "INITDLPCG" & "," & "INITDLPCE" & "," & "INITDLPCE2A" & "," & "DLPCBCCH")
+        End If
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If CELL <> "" Then
+                        outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A & "," & DLPCBCCH)
+                        DLPCBCCH = ""
+                        CELL = ""
+                    End If
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "CELL     DLPCG     DLPCE     DLPCE2A   INITDLPCG  INITDLPCE  INITDLPCE2A" Then
+                        If CELL <> "" Then
+                            outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A & "," & DLPCBCCH)
+                            CELL = ""
+                            DLPCBCCH = ""
+                        End If
+                        templine = getNowLine()
+                        CELL = Trim(Mid(templine, 1, 9))
+                        DLPCG = Trim(Mid(templine, 10, 10))
+                        DLPCE = Trim(Mid(templine, 20, 10))
+                        DLPCE2A = Trim(Mid(templine, 30, 10))
+                        INITDLPCG = Trim(Mid(templine, 40, 11))
+                        INITDLPCE = Trim(Mid(templine, 51, 11))
+                        INITDLPCE2A = Trim(Mid(templine, 62, 11))
+                    ElseIf UCase(Trim(templine)) = "DLPCBCCH" Then
+                        outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A & "," & DLPCBCCH)
+                        DLPCBCCH = ""
+                        CELL = ""
+                    ElseIf UCase(Trim(templine)) <> "PACKET SWITCHED DOWNLINK POWER CONTROL DATA" And Len(Trim(Mid(templine, 1, 9))) < 9 And UCase(Trim(templine)) <> "CELL     DLPCG     DLPCE     DLPCE2A   INITDLPCG  INITDLPCE  INITDLPCE2A" And UCase(Trim(templine)) <> "DLPCBCCH" Then
+                        If CELL <> "" Then
+                            outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A & "," & DLPCBCCH)
+                            DLPCBCCH = ""
+                            CELL = ""
+                        End If
+                        CELL = Trim(Mid(templine, 1, 9))
+                        DLPCG = Trim(Mid(templine, 10, 10))
+                        DLPCE = Trim(Mid(templine, 20, 10))
+                        DLPCE2A = Trim(Mid(templine, 30, 10))
+                        INITDLPCG = Trim(Mid(templine, 40, 11))
+                        INITDLPCE = Trim(Mid(templine, 51, 11))
+                        INITDLPCE2A = Trim(Mid(templine, 62, 11))
+                        outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A)
+                        CELL = ""
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+
+    Private Sub doRFVCP(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+        Dim CELL As String, VAMOSCELLSTATE As String, AQPSKONBCCH As String, ASSV As String, QBAHRV As String, QBAWBV As String, QBNAV As String
+        Dim QDESDLOVN As String, QDESDLOVP As String, QDESULOVN As String, QDESULOVP As String, SSTHRASSV As String, SSTHRV As String
+        Dim TSCSET1PAIRS As String, FULLAQPSK As String, VHOSUCCESS As String, CLTHV As String, THRAV As String, THRVP As String, THRDV As String
+        Dim QBAFRV As String
+
+        'CELL     VAMOSCELLSTATE  AQPSKONBCCH  ASSV  QBAHRV  QBAWBV  QBNAV
+        'QDESDLOVN  QDESDLOVP  QDESULOVN  QDESULOVP  SSTHRASSV  SSTHRV
+        'TSCSET1PAIRS  FULLAQPSK  VHOSUCCESS  CLTHV  THRAV  THRVP  THRDV
+        'QBAFRV
+
+        CELL = ""
+        VAMOSCELLSTATE = ""
+        AQPSKONBCCH = ""
+        ASSV = ""
+        QBAHRV = ""
+        QBAWBV = ""
+        QBNAV = ""
+        QDESDLOVN = ""
+        QDESDLOVP = ""
+        QDESULOVN = ""
+        QDESULOVP = ""
+        SSTHRASSV = ""
+        SSTHRV = ""
+        TSCSET1PAIRS = ""
+        FULLAQPSK = ""
+        VHOSUCCESS = ""
+        CLTHV = ""
+        THRAV = ""
+        THRVP = ""
+        THRDV = ""
+        QBAFRV = ""
+
+        filepath = outPath & "RFVCP_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "CELL" & "," & "VAMOSCELLSTATE" & "," & "AQPSKONBCCH" & "," & "ASSV" & "," & "QBAHRV" & "," & "QBAWBV" & "," & "")
         End If
 
         Do While Not EOF(1)
@@ -4886,22 +4995,16 @@ Public Class CDD_parse
                     If UCase(Trim(templine)) = "CELL     DLPCG     DLPCE     DLPCE2A   INITDLPCG  INITDLPCE  INITDLPCE2A" Then
                         templine = getNowLine()
                         CELL = Trim(Mid(templine, 1, 9))
-                        DLPCG = Trim(Mid(templine, 10, 10))
-                        DLPCE = Trim(Mid(templine, 20, 10))
-                        DLPCE2A = Trim(Mid(templine, 30, 10))
-                        INITDLPCG = Trim(Mid(templine, 40, 11))
-                        INITDLPCE = Trim(Mid(templine, 51, 11))
-                        INITDLPCE2A = Trim(Mid(templine, 62, 11))
-                        outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A)
+                        'DLPCG = Trim(Mid(templine, 10, 10))
+                        'DLPCE = Trim(Mid(templine, 20, 10))
+                        'DLPCE2A = Trim(Mid(templine, 30, 10))
+                        'INITDLPCG = Trim(Mid(templine, 40, 11))
+                        'INITDLPCE = Trim(Mid(templine, 51, 11))
+                        'INITDLPCE2A = Trim(Mid(templine, 62, 11))
+                        'outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A)
                     ElseIf UCase(Trim(templine)) <> "PACKET SWITCHED DOWNLINK POWER CONTROL DATA" And Len(Trim(Mid(templine, 1, 9))) < 9 And UCase(Trim(templine)) <> "CELL     DLPCG     DLPCE     DLPCE2A   INITDLPCG  INITDLPCE  INITDLPCE2A" Then
                         CELL = Trim(Mid(templine, 1, 9))
-                        DLPCG = Trim(Mid(templine, 10, 10))
-                        DLPCE = Trim(Mid(templine, 20, 10))
-                        DLPCE2A = Trim(Mid(templine, 30, 10))
-                        INITDLPCG = Trim(Mid(templine, 40, 11))
-                        INITDLPCE = Trim(Mid(templine, 51, 11))
-                        INITDLPCE2A = Trim(Mid(templine, 62, 11))
-                        outputFile.writeLINE(BSCNAME & "," & CELL & "," & DLPCG & "," & DLPCE & "," & DLPCE2A & "," & INITDLPCG & "," & INITDLPCE & "," & INITDLPCE2A)
+
                     End If
                 End If
             End If
@@ -4909,7 +5012,8 @@ Public Class CDD_parse
         outputFile.CLOSE()
         outputFile = Nothing
     End Sub
-    private sub doRLACP(sender As Object)
+
+    Private sub doRLACP(sender As Object)
         Dim outputFile As Object
         Dim filepath As String
         Dim templine As String
@@ -5223,8 +5327,8 @@ Public Class CDD_parse
         Dim filepath As String
         Dim templine As String
         Dim Cell As String, DBPSTATE As String
-        Dim SCTYPE As String, SSDESDL As String, QDESDL As String, LCOMPDL As String, QCOMPDL As String
-        'CELL     DBPSTATE
+        Dim SCTYPE As String, SSDESDL As String, QDESDL As String, LCOMPDL As String, QCOMPDL As String, DBPBCCHSTATE As String
+        'CELL     DBPSTATE  DBPBCCHSTATE(g14)
         'SCTYPE   SSDESDL  QDESDL  LCOMPDL  QCOMPDL
         '         BSPWRMINP  BSPWRMINN
         Cell = ""
@@ -5234,12 +5338,13 @@ Public Class CDD_parse
         QDESDL = ""
         LCOMPDL = ""
         QCOMPDL = ""
+        DBPBCCHSTATE = ""
         filepath = outPath & "RLBCP_" & CDDtime & ".csv"
         If fso.fileExists(filepath) Then
             outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
         Else
             outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
-            outputFile.writeline("BSC" & "," & "CELL" & "," & "DBPSTATE" & "," & "SCTYPE" & "," & "SSDESDL" & "," & "QDESDL" & "," & "LCOMPDL" & "," & "QCOMPDL" & "," & "BSPWRMINP" & "," & "BSPWRMINN")
+            outputFile.writeline("BSC" & "," & "CELL" & "," & "DBPSTATE" & "," & "SCTYPE" & "," & "SSDESDL" & "," & "QDESDL" & "," & "LCOMPDL" & "," & "QCOMPDL" & "," & "BSPWRMINP" & "," & "BSPWRMINN" & "," & "DBPBCCHSTATE")
         End If
 
 
@@ -5258,11 +5363,12 @@ Public Class CDD_parse
                         Exit Sub
                     End If
                 Else
-                    If Trim(templine) = "CELL     DBPSTATE" Then
+                    If Trim(templine) = "CELL     DBPSTATE" Or Trim(templine) = "CELL     DBPSTATE  DBPBCCHSTATE" Then
                         templine = getNowLine()
                         If Trim(templine) <> "NONE" Then
                             Cell = Trim(Mid(templine, 1, 9))
-                            DBPSTATE = Trim(Mid(templine, 10, 9))
+                            DBPSTATE = Trim(Mid(templine, 10, 10))
+                            DBPBCCHSTATE = Trim(Mid(templine, 20, 10))
                         End If
                     ElseIf Trim(templine) = "SCTYPE   SSDESDL  QDESDL  LCOMPDL  QCOMPDL" Then
                         templine = getNowLine()
@@ -5279,7 +5385,7 @@ Public Class CDD_parse
                         If Trim(templine) <> "NONE" Then
                             '         BSPWRMINP  BSPWRMINN
                             outputFile.writeLine(BSCNAME & "," & Cell & "," & DBPSTATE & "," & SCTYPE & "," & SSDESDL & "," & QDESDL & "," & LCOMPDL & "," & QCOMPDL _
-                                & "," & Trim(Mid(templine, 1, 20)) & "," & Trim(Mid(templine, 21, 9)))
+                                & "," & Trim(Mid(templine, 1, 20)) & "," & Trim(Mid(templine, 21, 9)) & "," & DBPBCCHSTATE)
                         End If
                     End If
                 End If
@@ -6956,20 +7062,37 @@ Public Class CDD_parse
         Dim outputFile As Object
         Dim filepath As String
         Dim templine As String
-        Dim CELL As String, EARFCN As String
+        Dim CELL As String, EARFCN As String, LISTTYPE As String, EBCAST As String, EFREE As String, EREQ As String
         'CELL
         'EARFCN
 
+        'CELL
+        'D57390P
+
+        'LISTTYPE
+        'IDLE
+
+        '     EARFCN
+        '     38355 
+
+        'LISTTYPE    EBCAST   EFREE  EREQ
+        'ACTIVE      UNKNOWN
+
+        '     EARFCN
+
         CELL = ""
         EARFCN = ""
-
+        LISTTYPE = ""
+        EBCAST = ""
+        EFREE = ""
+        EREQ = ""
 
         filepath = outPath & "RLEFP_" & CDDTime & ".csv"
         If fso.fileExists(filepath) Then
             outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
         Else
             outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
-            outputFile.writeline("BSC" & "," & "CELL" & "," & "EARFCN")
+            outputFile.writeline("BSC" & "," & "CELL" & "," & "EARFCN" & "," & "LISTTYPE" & "," & "EBCAST" & "," & "EFREE" & "," & "EREQ")
         End If
 
 
@@ -6979,9 +7102,13 @@ Public Class CDD_parse
                 If isEnd(templine) Then
                     If Strings.Left(templine, 1) = "<" Then
                         If CELL <> "" And EARFCN <> "" Then
-                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN)
+                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN & "," & LISTTYPE & "," & EBCAST & "," & EFREE & "," & EREQ)
                             CELL = ""
                             EARFCN = ""
+                            LISTTYPE = ""
+                            EBCAST = ""
+                            EFREE = ""
+                            EREQ = ""
                         End If
                         outputFile.close()
                         outputFile = Nothing
@@ -6989,9 +7116,13 @@ Public Class CDD_parse
                         Exit Sub
                     Else
                         If CELL <> "" And EARFCN <> "" Then
-                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN)
+                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN & "," & LISTTYPE & "," & EBCAST & "," & EFREE & "," & EREQ)
                             CELL = ""
                             EARFCN = ""
+                            LISTTYPE = ""
+                            EBCAST = ""
+                            EFREE = ""
+                            EREQ = ""
                         End If
                         outputFile.close()
                         outputFile = Nothing
@@ -7000,23 +7131,33 @@ Public Class CDD_parse
                 Else
                     If UCase(Trim(templine)) = "CELL" Then
                         If CELL <> "" And EARFCN <> "" Then
-                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN)
+                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN & "," & LISTTYPE & "," & EBCAST & "," & EFREE & "," & EREQ)
                             CELL = ""
                             EARFCN = ""
+                            LISTTYPE = ""
+                            EBCAST = ""
+                            EFREE = ""
+                            EREQ = ""
                         End If
                         templine = getNowLine()
                         If Not Trim(templine) = "NONE" Then
                             CELL = Trim(Mid(templine, 1, 9))
                         End If
+                    ElseIf UCase(Trim(Mid(templine, 1, 12))) = "LISTTYPE" Then
+                        templine = getNowLine()
+                        LISTTYPE = Trim(Mid(templine, 1, 12))
+                        EBCAST = Trim(Mid(templine, 13, 9))
+                        EFREE = Trim(Mid(templine, 22, 7))
+                        EREQ = Trim(Mid(templine, 29, 9))
                     ElseIf UCase(Trim(templine)) = "EARFCN" Then
                         templine = getNowLine()
                         EARFCN = Trim(templine)
-                        outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN)
+                        outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN & "," & LISTTYPE & "," & EBCAST & "," & EFREE & "," & EREQ)
                         EARFCN = ""
                     ElseIf UCase(Trim(templine)) <> "CELL E-UTRAN MEASUREMENT FREQUENCY DATA" And Len(Trim(Mid(templine, 1, 9))) <= 6 Then
                         If Not Trim(templine) = "NONE" Then
                             EARFCN = Trim(templine)
-                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN)
+                            outputFile.writeline(BSCNAME & "," & CELL & "," & EARFCN & "," & LISTTYPE & "," & EBCAST & "," & EFREE & "," & EREQ)
                             EARFCN = ""
                         End If
                     End If
@@ -10520,11 +10661,11 @@ Public Class CDD_parse
                         FDD_HPRIOTHR = Trim(Mid(templine, 20, 10))
                         FDD_LPRIOTHR = Trim(Mid(templine, 30, 10))
                         FDD_QRXLEVMINU = Trim(Mid(templine, 40, 10))
-                        outputFile1.writeLINE(BSCNAME & "," & CELL & "," & PRIOCR & "," & BCAST & "," & FREE & "," & REQ & "," & _
-                                             RATPRIO & "," & MEASTHR & "," & PRIOTHR & "," & HPRIO & "," & TRES & "," & _
+                        outputFile1.writeLINE(BSCNAME & "," & CELL & "," & PRIOCR & "," & BCAST & "," & FREE & "," & REQ & "," &
+                                             RATPRIO & "," & MEASTHR & "," & PRIOTHR & "," & HPRIO & "," & TRES & "," &
                                              FDDARFCN & "," & FDD_RATPRIO & "," & FDD_HPRIOTHR & "," & FDD_LPRIOTHR & "," & FDD_QRXLEVMINU)
                         mark = "FDD"
-                    ElseIf UCase(Trim(templine)) = "EARFCN  RATPRIO  HPRIOTHR  LPRIOTHR  QRXLEVMINE  MINCHBW" Then
+                    ElseIf UCase(Trim(templine)) = "EARFCN  RATPRIO  HPRIOTHR  LPRIOTHR  QRXLEVMINE  MINCHBW" Or UCase(Trim(templine)) = "EARFCN  RATPRIO  HPRIOTHR  LPRIOTHR  QRXLEVMINE" Then
                         templine = getNowLine()
                         EARFCN = Trim(Mid(templine, 1, 8))
                         E_RATPRIO = Trim(Mid(templine, 9, 9))
@@ -10884,6 +11025,7 @@ Public Class CDD_parse
         Dim CELL As String
         Dim QSC As String, QSCI As String, QSI As String, FDDMRR As String, FDDQMIN As String, FDDQOFF As String, SPRIO As String, FDDQMINOFF As String, FDDRSCPMIN As String
         Dim FDDREPTHR2 As String, TQSI As String, TDDMRR As String, TDDQOFF As String, TSPRIO As String
+        Dim TQSC As String, TQSCI As String, TDDTHR As String
         CELL = ""
         QSC = ""
         QSCI = ""
@@ -10900,10 +11042,17 @@ Public Class CDD_parse
         TDDQOFF = ""
         TSPRIO = ""
 
+        TQSC = ""
+        TQSCI = ""
+        TDDTHR = ""
+
         'CELL
         'QSC  QSCI  QSI  FDDMRR  FDDQMIN  FDDQOFF  SPRIO  FDDQMINOFF  FDDRSCPMIN
         'FDDREPTHR2
         'TQSI   TDDMRR   TDDQOFF   TSPRIO
+
+        'G14
+        'TQSI   TDDMRR   TDDQOFF   TQSC   TQSCI   TDDTHR
 
         filepath = outPath & "RLSUP_" & CDDtime & ".csv"
         If fso.fileExists(filepath) Then
@@ -10911,7 +11060,8 @@ Public Class CDD_parse
         Else
             outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
             outputFile.writeline("BSC" & "," & "CELL" & "," & "QSC" & "," & "QSCI" & "," & "QSI" & "," & "FDDMRR" & "," & "FDDQMIN" & "," & "FDDQOFF" & "," & "SPRIO" & "," & "FDDQMINOFF" & "," & "FDDRSCPMIN" & "," & "FDDREPTHR2" _
-                                  & "," & "TQSI" & "," & "TDDMRR " & "," & "  TDDQOFF   " & "," & "TSPRIO")
+                                  & "," & "TQSI" & "," & "TDDMRR " & "," & "  TDDQOFF   " & "," & "TSPRIO" _
+                                  & "," & "TQSC" & "," & "TQSCI" & "," & "TDDTHR")
         End If
         Do While Not EOF(1)
             templine = getNowLine()
@@ -10920,7 +11070,7 @@ Public Class CDD_parse
                     If Strings.left(templine, 1) = "<" Then
                         If CELL <> "" Then
                             outputFile.writeLine(BSCNAME & "," & CELL & "," & QSC & "," & QSCI & "," & QSI & "," & FDDMRR & "," & FDDQMIN & "," & FDDQOFF & "," & SPRIO & "," & FDDQMINOFF & "," & FDDRSCPMIN _
-                          & "," & FDDREPTHR2 & "," & TQSI & "," & TDDMRR & "," & TDDQOFF & "," & TSPRIO)
+                          & "," & FDDREPTHR2 & "," & TQSI & "," & TDDMRR & "," & TDDQOFF & "," & TSPRIO & "," & TQSC & "," & TQSCI & "," & TDDTHR)
 
                         End If
                         outputFile.close()
@@ -10930,7 +11080,7 @@ Public Class CDD_parse
                     Else
                         If CELL <> "" Then
                             outputFile.writeLine(BSCNAME & "," & CELL & "," & QSC & "," & QSCI & "," & QSI & "," & FDDMRR & "," & FDDQMIN & "," & FDDQOFF & "," & SPRIO & "," & FDDQMINOFF & "," & FDDRSCPMIN _
-                          & "," & FDDREPTHR2 & "," & TQSI & "," & TDDMRR & "," & TDDQOFF & "," & TSPRIO)
+                          & "," & FDDREPTHR2 & "," & TQSI & "," & TDDMRR & "," & TDDQOFF & "," & TSPRIO & "," & TQSC & "," & TQSCI & "," & TDDTHR)
 
                         End If
                         outputFile.close()
@@ -10942,7 +11092,7 @@ Public Class CDD_parse
                         templine = getNowLine()
                         If CELL <> "" Then
                             outputFile.writeLine(BSCNAME & "," & CELL & "," & QSC & "," & QSCI & "," & QSI & "," & FDDMRR & "," & FDDQMIN & "," & FDDQOFF & "," & SPRIO & "," & FDDQMINOFF & "," & FDDRSCPMIN _
-                                                 & "," & FDDREPTHR2 & "," & TQSI & "," & TDDMRR & "," & TDDQOFF & "," & TSPRIO)
+                          & "," & FDDREPTHR2 & "," & TQSI & "," & TDDMRR & "," & TDDQOFF & "," & TSPRIO & "," & TQSC & "," & TQSCI & "," & TDDTHR)
                             CELL = ""
                             QSC = ""
                             QSCI = ""
@@ -10958,6 +11108,9 @@ Public Class CDD_parse
                             TDDMRR = ""
                             TDDQOFF = ""
                             TSPRIO = ""
+                            TQSC = ""
+                            TQSCI = ""
+                            TDDTHR = ""
                         End If
                         If Not Trim(templine) = "NONE" Then
                             CELL = Trim(Mid(templine, 1, 10))
@@ -10982,6 +11135,15 @@ Public Class CDD_parse
                         TDDMRR = Trim(Mid(templine, 8, 9))
                         TDDQOFF = Trim(Mid(templine, 17, 10))
                         TSPRIO = Trim(Mid(templine, 27, 6))
+                    ElseIf UCase(Trim(templine)) = "TQSI   TDDMRR   TDDQOFF   TQSC   TQSCI   TDDTHR" Then
+                        'G14
+                        templine = getNowLine()
+                        TQSI = Trim(Mid(templine, 1, 7))
+                        TDDMRR = Trim(Mid(templine, 8, 9))
+                        TDDQOFF = Trim(Mid(templine, 17, 10))
+                        TQSC = Trim(Mid(templine, 27, 7))
+                        TQSCI = Trim(Mid(templine, 34, 8))
+                        TDDTHR = Trim(Mid(templine, 42, 12))
                     End If
                 End If
             End If
@@ -15099,8 +15261,14 @@ Public Class CDD_parse
         Dim templine As String
         Dim MO As String, MAXPWR As String, MAXTRX As String, PAO As String, TXMPWR As String, IPM As String, MIXEDMODE As String
         Dim MINFREQ As String, MAXFREQ As String, CCMD As String, CCTP As String, EMTP As String, EMDI As String, EMRA As String
+        Dim TPO As String, CCID As String
         'MO                MAXPWR   MAXTRX   PAO   TXMPWR   IPM  MIXEDMODE
         '                  MINFREQ  MAXFREQ  CCMD  CCTP  EMTP  EMDI  EMRA
+
+        'G14 
+        'MO                MAXPWR   MAXTRX   PAO   TXMPWR   IPM  MIXEDMODE  TPO
+        '                  MINFREQ  MAXFREQ
+        '                  CCMD  CCID   CCTP  EMTP  EMDI   EMRA
         MO = ""
         MAXPWR = ""
         MAXTRX = ""
@@ -15115,13 +15283,15 @@ Public Class CDD_parse
         EMTP = ""
         EMDI = ""
         EMRA = ""
+        TPO = ""
+        CCID = ""
         filepath = outPath & "RXMOP_RXOMCTR_" & CDDtime & ".csv"
         If fso.fileExists(filepath) Then
             outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
         Else
             outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
             outputFile.writeline("BSC" & "," & "MO" & "," & "BSC_MO" & "," & "MAXPWR" & "," & "MAXTRX" & "," & "PAO" & "," & "TXMPWR" & "," & "IPM" & "," & "MIXEDMODE" _
-                                 & "," & "MINFREQ" & "," & "MAXFREQ" & "," & "CCMD" & "," & "CCTP" & "," & "EMTP" & "," & "EMDI" & "," & "EMRA")
+                                 & "," & "MINFREQ" & "," & "MAXFREQ" & "," & "CCMD" & "," & "CCTP" & "," & "EMTP" & "," & "EMDI" & "," & "EMRA" & "," & "TPO" & "," & "CCID")
         End If
         Do While Not EOF(1)
             templine = getNowLine()
@@ -15130,7 +15300,7 @@ Public Class CDD_parse
                     If Strings.left(templine, 1) = "<" Then
                         If MO <> "" Then
                             outputFile.writeLine(BSCNAME & "," & MO & "," & BSCNAME & "_" & MO & "," & MAXPWR & "," & MAXTRX & "," & PAO & "," & TXMPWR & "," & IPM & "," & MIXEDMODE _
-                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA)
+                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA & "," & TPO & "," & CCID)
                         End If
                         outputFile.close()
                         outputFile = Nothing
@@ -15139,7 +15309,7 @@ Public Class CDD_parse
                     Else
                         If MO <> "" Then
                             outputFile.writeLine(BSCNAME & "," & MO & "," & BSCNAME & "_" & MO & "," & MAXPWR & "," & MAXTRX & "," & PAO & "," & TXMPWR & "," & IPM & "," & MIXEDMODE _
-                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA)
+                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA & "," & TPO & "," & CCID)
                         End If
                         outputFile.close()
                         outputFile = Nothing
@@ -15149,7 +15319,7 @@ Public Class CDD_parse
                     If UCase(Mid(Trim(templine), 1, 54)) = "MO                MAXPWR   MAXTRX   PAO   TXMPWR   IPM" Then
                         If MO <> "" Then
                             outputFile.writeLine(BSCNAME & "," & MO & "," & BSCNAME & "_" & MO & "," & MAXPWR & "," & MAXTRX & "," & PAO & "," & TXMPWR & "," & IPM & "," & MIXEDMODE _
-                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA)
+                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA & "," & TPO & "," & CCID)
                         End If
                         templine = getNowLine()
                         'MO                MAXPWR   MAXTRX   PAO   TXMPWR   IPM  MIXEDMODE
@@ -15160,11 +15330,15 @@ Public Class CDD_parse
                             PAO = Trim(Mid(templine, 37, 6))
                             TXMPWR = Trim(Mid(templine, 43, 9))
                             IPM = Trim(Mid(templine, 52, 5))
-                            MIXEDMODE = Trim(Mid(templine, 57, 9))
+                            MIXEDMODE = Trim(Mid(templine, 57, 11))
+                            TPO = Trim(Mid(templine, 68, 11))
                         End If
                     ElseIf UCase(Mid(Trim(templine), 1, 16)) = "MINFREQ  MAXFREQ" Then
                         templine = getNowLine()
                         '                  MINFREQ  MAXFREQ  CCMD  CCTP  EMTP  EMDI  EMRA
+
+                        'G14
+                        '                  MINFREQ  MAXFREQ
                         If Not Trim(templine) = "NONE" Then
                             MINFREQ = Trim(Mid(templine, 19, 9))
                             MAXFREQ = Trim(Mid(templine, 28, 9))
@@ -15174,8 +15348,40 @@ Public Class CDD_parse
                             EMDI = Trim(Mid(templine, 55, 6))
                             EMRA = Trim(Mid(templine, 61, 4))
                         End If
+                        If CCMD <> "" Then
+                            outputFile.writeLine(BSCNAME & "," & MO & "," & BSCNAME & "_" & MO & "," & MAXPWR & "," & MAXTRX & "," & PAO & "," & TXMPWR & "," & IPM & "," & MIXEDMODE _
+                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA & "," & TPO & "," & CCID)
+                            MO = ""
+                            MAXPWR = ""
+                            MAXTRX = ""
+                            PAO = ""
+                            TXMPWR = ""
+                            IPM = ""
+                            MIXEDMODE = ""
+                            MINFREQ = ""
+                            MAXFREQ = ""
+                            CCMD = ""
+                            CCTP = ""
+                            EMTP = ""
+                            EMDI = ""
+                            EMRA = ""
+                            TPO = ""
+                            CCID = ""
+                        End If
+                    ElseIf UCase(Mid(Trim(templine), 1, 17)) = "CCMD  CCID   CCTP" Then
+                        templine = getNowLine()
+                        'g14 
+                        '                  CCMD  CCID   CCTP  EMTP  EMDI   EMRA
+                        If Not Trim(templine) = "NONE" Then
+                            CCMD = Trim(Mid(templine, 19, 6))
+                            CCID = Trim(Mid(templine, 25, 7))
+                            CCTP = Trim(Mid(templine, 32, 6))
+                            EMTP = Trim(Mid(templine, 38, 6))
+                            EMDI = Trim(Mid(templine, 44, 7))
+                            EMRA = Trim(Mid(templine, 51, 10))
+                        End If
                         outputFile.writeLine(BSCNAME & "," & MO & "," & BSCNAME & "_" & MO & "," & MAXPWR & "," & MAXTRX & "," & PAO & "," & TXMPWR & "," & IPM & "," & MIXEDMODE _
-                                             & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA)
+                                                 & "," & MINFREQ & "," & MAXFREQ & "," & CCMD & "," & CCTP & "," & EMTP & "," & EMDI & "," & EMRA & "," & TPO & "," & CCID)
                         MO = ""
                         MAXPWR = ""
                         MAXTRX = ""
@@ -15190,6 +15396,8 @@ Public Class CDD_parse
                         EMTP = ""
                         EMDI = ""
                         EMRA = ""
+                        TPO = ""
+                        CCID = ""
                     End If
                 End If
             End If

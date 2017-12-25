@@ -24,6 +24,7 @@ Public Class HW_CDD_PARSE
         Dim outFileName As String  '全路径
         Dim tempStr As String
         Dim x As Integer
+        Dim cellName As String
         tempStr = ""
         outFileName = Strings.Left(GcellFilePath.Text, InStrRev(GcellFilePath.Text, "\")) & "Results_" & Format(FileDateTime(GtrxFilePath.Text), "yyyyMMdd") & ".csv"
         tempStr = "CELLID" & "," & "CELLNAME" & "," & "BSC" & "," & "频段" & "," & "LAC" & "," & "CI" & "," & "NCC" & "," & "BCC" & "," & "BSIC" & "," & "BCCH" & "," & "TCH1" & "," & "TCH2" & "," & "TCH3" & "," & "TCH4" & "," & "TCH5" & "," & "TCH6" & "," & "TCH7" & "," & "TCH8" & "," & "TCH9" & "," & "TCH10" & "," & "TCH11" & "," & "TCH12"
@@ -32,7 +33,9 @@ Public Class HW_CDD_PARSE
         '    myWriteLine(outFileName, tempStr)
         Try
             For x = 0 To BSC_INDEX_CELLNAME_ARR.Count - 1
-                tempStr = Split(BSC_INDEX_CELLNAME_ARR(x), "_")(1) & "," & Split(BSC_INDEX_CELLNAME_ARR(x), "_")(2) & "," & Split(BSC_INDEX_CELLNAME_ARR(x), "_")(0) & "," & CSYSTYPE_ARR(x) & "," & LAC_ARR(x) & "," & CI_ARR(x) & "," & Strings.Left(BSIC_ARR(x), 1) & "," & Strings.Right(BSIC_ARR(x), 1) & "," & BSIC_ARR(x) & "," & BSC_INDEX_CELLNAME_BCCH_DIC(BSC_INDEX_CELLNAME_ARR(x)) & "," & BSC_INDEX_CELLNAME_TCH_DIC(BSC_INDEX_CELLNAME_ARR(x))
+                cellName = Split(BSC_INDEX_CELLNAME_ARR(x), "_")(2)
+                cellName = Replace(cellName, "@", "_")
+                tempStr = Split(BSC_INDEX_CELLNAME_ARR(x), "_")(1) & "," & cellName & "," & Split(BSC_INDEX_CELLNAME_ARR(x), "_")(0) & "," & CSYSTYPE_ARR(x) & "," & LAC_ARR(x) & "," & CI_ARR(x) & "," & Strings.Left(BSIC_ARR(x), 1) & "," & Strings.Right(BSIC_ARR(x), 1) & "," & BSIC_ARR(x) & "," & BSC_INDEX_CELLNAME_BCCH_DIC(BSC_INDEX_CELLNAME_ARR(x)) & "," & BSC_INDEX_CELLNAME_TCH_DIC(BSC_INDEX_CELLNAME_ARR(x))
                 myWriteLine(outFileName, tempStr)
             Next
             MsgBox("转换完成！", MsgBoxStyle.Information)
@@ -104,6 +107,8 @@ Public Class HW_CDD_PARSE
             Do While Not EOF(fileNo)
                 tempLine = Replace(LineInput(fileNo), """", "")
                 temp_arr = Split(UCase(tempLine), ",")
+                temp_arr(3) = Replace(temp_arr(3), "_", "@")
+
                 If nowLineNo = 1 Then
                     If temp_arr(0) <> "BSCNAME" Or temp_arr(2) <> "CELLID" Or temp_arr(3) <> "CELLNAME" Or temp_arr(4) <> "TYPE" Then
                         MsgBox("GCELL文件格式不正确，请重新选择！", MsgBoxStyle.Critical)
@@ -161,6 +166,7 @@ Public Class HW_CDD_PARSE
             Do While Not EOF(fileNo)
                 tempLine = Replace(LineInput(fileNo), """", "")
                 temp_arr = Split(UCase(tempLine), ",")
+                temp_arr(1) = Replace(temp_arr(1), "_", "@")
                 If verFlag = 1 Then
                     freqNo = temp_arr(4)
                     bcchMark = temp_arr(5)
