@@ -1778,6 +1778,48 @@ Public Class CDD_parse
                     unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
                 Finally
                 End Try
+            Case "RRGSP:MOTY=RXSAT;"
+                Try
+                    doRRGSP_RXSAT(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            'Case "RRGSP:MOTY=RXSAT,DETAILS;"
+            '    Try
+            '        doRRGSP_RXSAT_DETAILS(sender)
+            '    Catch ex As Exception
+            '        unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+            '    Finally
+            '    End Try
+            Case "RRGSP:SCGR=ALL;"
+                Try
+                    doRRGSP_SCGR(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RRGSP:SCGR=ALL,MODE=SCM;"
+                Try
+                    doRRGSP_SCGR_SCM(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            'Case "RRGSP:SCGR=ALL,MODE=IPM,DETAILS;"
+            '    Try
+            '        doRRGSP_SCGR_IPM_DETAILS(sender)
+            '    Catch ex As Exception
+            '        unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+            '    Finally
+            '    End Try
+            Case "RRSGP:SCGR=ALL;"
+                Try
+                    doRRSGP_SCGR(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
             Case "RRMBP:MSC=ALL;"
                 Try
                     doRRMBP(sender)
@@ -1787,7 +1829,7 @@ Public Class CDD_parse
                 End Try
             Case "RRSCP:SCGR=ALL;"
                 Try
-                    doRRSCP(sender)
+                    doRRSCP_SCGR(sender)
                 Catch ex As Exception
                     unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
                 Finally
@@ -1960,6 +2002,48 @@ Public Class CDD_parse
                     unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
                 Finally
                 End Try
+            Case "RXMOP:MOTY=RXSTF;"
+                Try
+                    doRXMOP_RXSTF(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RXMOP:MOTY=RXSCF;"
+                Try
+                    doRXMOP_RXSCF(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RXMOP:MOTY=RXSTRX;"
+                Try
+                    doRXMOP_RXSTRX(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RXMOP:MOTY=RXSTX;"
+                Try
+                    doRXMOP_RXSTX(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RXMOP:MOTY=RXSRX;"
+                Try
+                    doRXMOP_RXSRX(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RXMOP:MOTY=RXSTS;"
+                Try
+                    doRXMOP_RXSTS(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
             Case "RXMOP:MOTY=RXOMCTR;"
                 Try
                     doRXMOP_RXOMCTR(sender)
@@ -1984,6 +2068,13 @@ Public Class CDD_parse
             Case "RXMOP:MOTY=RXOTG;"
                 Try
                     doRXMOP_RXOTG(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RXMOP:MOTY=RXSTG;"
+                Try
+                    doRXMOP_RXSTG(sender)
                 Catch ex As Exception
                     unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
                 Finally
@@ -2019,6 +2110,13 @@ Public Class CDD_parse
             Case "RXMSP:MOTY=RXOTF;"
                 Try
                     doRXMSP_RXOTF(sender)
+                Catch ex As Exception
+                    unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
+                Finally
+                End Try
+            Case "RXTCP:MOTY=RXSTG;"
+                Try
+                    doRXTCP_RXSTG(sender)
                 Catch ex As Exception
                     unParseCommand = unParseCommand & "=>" & BSCNAME & "的" & temp & "指令未正常转换，请稍候检查！" & vbCrLf
                 Finally
@@ -11532,7 +11630,7 @@ Public Class CDD_parse
         outputFile.close()
         outputFile = Nothing
     End Sub
-    Private Sub doRRSCP(sender As Object)
+    Private Sub doRRSCP_SCGR(sender As Object)
         Dim outputFile As Object
         Dim filepath As String
         Dim templine As String
@@ -11555,7 +11653,7 @@ Public Class CDD_parse
         STATE = ""
         REASON = ""
 
-        filepath = outPath & "RRSCP_" & CDDTime & ".csv"
+        filepath = outPath & "RRSCP_SCGR" & CDDTime & ".csv"
         If fso.fileExists(filepath) Then
             outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
         Else
@@ -14845,7 +14943,7 @@ Public Class CDD_parse
         outputFile.close()
         outputFile = Nothing
     End Sub
-    private sub doRXMOP_RXOTG(sender As Object)
+    Private Sub doRXMOP_RXOTG(sender As Object)
         Dim outputFile As Object
         Dim filepath As String
         Dim templine As String
@@ -15033,7 +15131,96 @@ Public Class CDD_parse
         outputFile.close()
         outputFile = Nothing
     End Sub
-    private sub doRXMOP_RXORX(sender As Object)
+
+    Private Sub doRXMOP_RXSTG(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+        Dim MO As String, RSITE As String, SECTOR As String, IMBVAMOS As String, MODEL As String
+        Dim CONFMD As String, BSSWANTED As String, CCCHCMD As String
+
+        'MO                SECTOR                RSITE            MODEL
+
+        '          CONFMD   CCCHCMD   BSSWANTED  IMBVAMOS
+
+        MO = ""
+        SECTOR = ""
+        RSITE = ""
+        MODEL = ""
+        CONFMD = ""
+        CCCHCMD = ""
+        BSSWANTED = ""
+        IMBVAMOS = ""
+
+        filepath = outPath & "RXMOP_RXSTG_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO" & "," & "SECTOR" & "," & "RSITE" & "," & "MODEL" _
+                                 & "," & "CONFMD" & "," & "CCCHCMD" & "," & "BSSWANTED" & "," & "IMBVAMOS")
+        End If
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        If MO <> "" Then
+                            outputFile.writeline(BSCNAME & "," & MO & "," & SECTOR & "," & RSITE & "," & MODEL _
+                                                 & "," & CONFMD & "," & CCCHCMD & "," & BSSWANTED & "," & IMBVAMOS)
+                        End If
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(Trim(templine), sender)
+                        Exit Sub
+                    Else
+                        If MO <> "" Then
+                            outputFile.writeline(BSCNAME & "," & MO & "," & SECTOR & "," & RSITE & "," & MODEL _
+                                                 & "," & CONFMD & "," & CCCHCMD & "," & BSSWANTED & "," & IMBVAMOS)
+                        End If
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Strings.Left(Trim(templine), 23)) = "MO                SECTO" Then
+                        templine = getNowLine()
+                        If Not Trim(templine) = "NONE" Then
+                            'MO                SECTOR                RSITE            MODEL
+
+                            MO = Trim(Mid(templine, 1, 19))
+                            SECTOR = Trim(Mid(templine, 20, 22))
+                            RSITE = Trim(Mid(templine, 42, 17))
+                            MODEL = Trim(Mid(templine, 59, 16))
+                        End If
+                    ElseIf UCase(Trim(templine)) = "CONFMD   CCCHCMD   BSSWANTED  IMBVAMOS" Then
+                        templine = getNowLine()
+                        If Not Trim(templine) = "NONE" Then
+                            '                  CONFMD   CCCHCMD   BSSWANTED  IMBVAMOS
+                            CONFMD = Trim(Mid(templine, 20, 9))
+                            CCCHCMD = Trim(Mid(templine, 29, 10))
+                            BSSWANTED = Trim(Mid(templine, 39, 11))
+                            IMBVAMOS = Trim(Mid(templine, 50, 17))
+                        End If
+
+                        outputFile.writeline(BSCNAME & "," & MO & "," & SECTOR & "," & RSITE & "," & MODEL _
+                                                 & "," & CONFMD & "," & CCCHCMD & "," & BSSWANTED & "," & IMBVAMOS)
+                        MO = ""
+                        SECTOR = ""
+                        RSITE = ""
+                        MODEL = ""
+                        CONFMD = ""
+                        CCCHCMD = ""
+                        BSSWANTED = ""
+                        IMBVAMOS = ""
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.close()
+        outputFile = Nothing
+    End Sub
+    Private sub doRXMOP_RXORX(sender As Object)
         Dim outputFile As Object
         Dim filepath As String
         Dim templine As String
@@ -15487,6 +15674,499 @@ Public Class CDD_parse
         outputFile.CLOSE()
         outputFile = Nothing
     End Sub
+    Private Sub doRXMOP_RXSTF(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'MO                FSOFFSET  SCLUSTERID  SCLFSOFFSET
+        filepath = outPath & "RXMOP_RXSTF_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO" & "," & "FSOFFSET" & "," & "SCLUSTERID" & "," & "SCLFSOFFSET")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Strings.Left(Trim(templine), 22)) = "MO                FSOF" Then
+                        templine = getNowLine()
+                        'MO                FSOFFSET  SCLUSTERID  SCLFSOFFSET
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)) & "," & Trim(Mid(templine, 29, 12)) & "," & Trim(Mid(templine, 41, 6)) & "," & Trim(Mid(templine, 47, 7)) & "," & Trim(Mid(templine, 54, 6)) & "," & Trim(Mid(templine, 60, 5)))
+                    ElseIf Trim(Mid(templine, 1, 5)) = "RXSTF" Then
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)) & "," & Trim(Mid(templine, 29, 12)) & "," & Trim(Mid(templine, 41, 6)) & "," & Trim(Mid(templine, 47, 7)) & "," & Trim(Mid(templine, 54, 6)) & "," & Trim(Mid(templine, 60, 5)))
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+    Private Sub doRXMOP_RXSCF(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'MO                TEI
+        filepath = outPath & "RXMOP_RXSCF_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO" & "," & "TEI")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "MO                TEI" Then
+                        templine = getNowLine()
+                        'MO                TEI
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    ElseIf Trim(Mid(templine, 1, 5)) = "RXSCF" Then
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+
+    Private Sub doRXMOP_RXSTRX(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'MO                
+        filepath = outPath & "RXMOP_RXSTRX_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "MO" Then
+                        templine = getNowLine()
+                        'MO
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    ElseIf Trim(Mid(templine, 1, 5)) = "RXSTR" Then
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+
+    Private Sub doRXMOP_RXSTX(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'MO                
+        filepath = outPath & "RXMOP_RXSTX_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "MO" Then
+                        templine = getNowLine()
+                        'MO                
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    ElseIf Trim(Mid(templine, 1, 5)) = "RXSTX" Then
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+    Private Sub doRXMOP_RXSRX(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'MO                
+        filepath = outPath & "RXMOP_RXSRX_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "MO" Then
+                        templine = getNowLine()
+                        'MO               
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    ElseIf Trim(Mid(templine, 1, 5)) = "RXSRX" Then
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+    Private Sub doRXMOP_RXSTS(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'MO                
+        filepath = outPath & "RXMOP_RXSTS_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "MO" Then
+                        templine = getNowLine()
+                        'MO               
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    ElseIf Trim(Mid(templine, 1, 5)) = "RXSTS" Then
+                        outputFile.writeLINE(BSCNAME & "," & Trim(Mid(templine, 1, 18)) & "," & Trim(Mid(templine, 19, 10)))
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+    Private Sub doRRGSP_RXSAT(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'MO          ATC   RP    STATUS                
+        filepath = outPath & "RRGSP_RXSAT_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO" & "," & "ATC" & "," & "RP" & "," & "STATUS")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "MO          ATC   RP    STATUS" Then
+                        templine = getNowLine()
+                        'MO          ATC   RP    STATUS               
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 12)) _
+                            & "," & Trim(Mid(templine, 13, 6)) _
+                            & "," & Trim(Mid(templine, 19, 6)) _
+                            & "," & Trim(Mid(templine, 25, 16))
+                        )
+                    ElseIf Trim(Mid(templine, 1, 5)) = "RXSAT" Then
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 12)) _
+                            & "," & Trim(Mid(templine, 13, 6)) _
+                            & "," & Trim(Mid(templine, 19, 6)) _
+                            & "," & Trim(Mid(templine, 25, 16))
+                        )
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+    Private Sub doRRGSP_SCGR(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'SCGR  MODE  RP    STATUS      ATC                
+        filepath = outPath & "RRGSP_SCGR_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "SCGR" & "," & "MODE" & "," & "RP" & "," & "STATUS" & "," & "STATUS")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "SCGR  MODE  RP    STATUS      ATC" Then
+                        templine = getNowLine()
+                        'SCGR  MODE  RP    STATUS      ATC               
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 6)) _
+                            & "," & Trim(Mid(templine, 7, 6)) _
+                            & "," & Trim(Mid(templine, 13, 6)) _
+                            & "," & Trim(Mid(templine, 19, 12)) _
+                            & "," & Trim(Mid(templine, 31, 12))
+                        )
+                    ElseIf UCase(Trim(templine)) <> "RADIO TRANSMISSION SUPER CHANNEL GROUP STATUS" Then
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 6)) _
+                            & "," & Trim(Mid(templine, 7, 6)) _
+                            & "," & Trim(Mid(templine, 13, 6)) _
+                            & "," & Trim(Mid(templine, 19, 12)) _
+                            & "," & Trim(Mid(templine, 31, 12))
+                        )
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+
+    Private Sub doRRGSP_SCGR_SCM(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'SCGR  MODE  RP    STATUS      ATC                
+        filepath = outPath & "RRGSP_SCGR_SCM" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "SCGR" & "," & "MODE" & "," & "RP" & "," & "STATUS" & "," & "STATUS")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "SCGR  MODE  RP    STATUS      ATC" Then
+                        templine = getNowLine()
+                        'SCGR  MODE  RP    STATUS      ATC               
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 6)) _
+                            & "," & Trim(Mid(templine, 7, 6)) _
+                            & "," & Trim(Mid(templine, 13, 6)) _
+                            & "," & Trim(Mid(templine, 19, 12)) _
+                            & "," & Trim(Mid(templine, 31, 12))
+                        )
+                    ElseIf UCase(Trim(templine)) <> "RADIO TRANSMISSION SUPER CHANNEL GROUP STATUS" Then
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 6)) _
+                            & "," & Trim(Mid(templine, 7, 6)) _
+                            & "," & Trim(Mid(templine, 13, 6)) _
+                            & "," & Trim(Mid(templine, 19, 12)) _
+                            & "," & Trim(Mid(templine, 31, 12))
+                        )
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
+    Private Sub doRRSGP_SCGR(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+
+        'SCGR  MODE  PSTU                  MBWDL  MBWUL  JBSUL  LDEL  IPOV                
+        filepath = outPath & "RRSGP_SCGR_" & CDDTime & ".csv"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "SCGR" & "," & "MODE" & "," & "PSTU" _
+                                  & "," & "MBWDL" & "," & "MBWUL" & "," & "JBSUL" & "," & "LDEL" & "," & "IPOV")
+        End If
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        outputFile.close()
+                        outputFile = Nothing
+                        doWhichMethod(templine, sender)
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Trim(templine)) = "SCGR  MODE  PSTU                  MBWDL  MBWUL  JBSUL  LDEL  IPOV" Then
+                        templine = getNowLine()
+                        'SCGR  MODE  PSTU                  MBWDL  MBWUL  JBSUL  LDEL  IPOV              
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 6)) _
+                            & "," & Trim(Mid(templine, 7, 6)) _
+                            & "," & Trim(Mid(templine, 13, 22)) _
+                            & "," & Trim(Mid(templine, 35, 7)) _
+                            & "," & Trim(Mid(templine, 42, 7)) _
+                            & "," & Trim(Mid(templine, 49, 7)) _
+                            & "," & Trim(Mid(templine, 56, 6)) _
+                            & "," & Trim(Mid(templine, 62, 17))
+                        )
+                    ElseIf UCase(Trim(templine)) <> "RADIO TRANSMISSION SUPER CHANNEL GROUP DATA" Then
+                        outputFile.writeLINE(
+                            BSCNAME _
+                            & "," & Trim(Mid(templine, 1, 6)) _
+                            & "," & Trim(Mid(templine, 7, 6)) _
+                            & "," & Trim(Mid(templine, 13, 22)) _
+                            & "," & Trim(Mid(templine, 35, 7)) _
+                            & "," & Trim(Mid(templine, 42, 7)) _
+                            & "," & Trim(Mid(templine, 49, 7)) _
+                            & "," & Trim(Mid(templine, 56, 6)) _
+                            & "," & Trim(Mid(templine, 62, 17))
+                        )
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+    End Sub
 
     Private Sub doRXMSP_RXOTF(sender As Object)
         Dim outputFile As Object
@@ -15531,6 +16211,94 @@ Public Class CDD_parse
         outputFile = Nothing
     End Sub
 
+    Private Sub doRXTCP_RXSTG(sender As Object)
+        Dim outputFile As Object
+        Dim filepath As String
+        Dim templine As String
+        Dim MO As String, CELL As String, CHGR As String
+        Dim temp As String
+
+        'MO               CELL                CHGR
+
+        MO = ""
+        CELL = ""
+        CHGR = ""
+        filepath = outPath & "RXTCP_RXSTG_" & CDDTime & ".csv"
+
+        TCP_CELL_MO_DIC("BSC#CELL") = "BSC#MO"
+        If fso.fileExists(filepath) Then
+            outputFile = fso.OpenTextFile(filepath, 8, 1, 0)
+        Else
+            outputFile = fso.OpenTextFile(filepath, 2, 1, 0)
+            outputFile.writeline("BSC" & "," & "MO" & "," & "CELL" & "," & "CHGR")
+        End If
+
+
+        Do While Not EOF(1)
+            templine = getNowLine()
+            If Trim(templine) <> "" Then
+                If isEnd(templine) Then
+                    If Strings.Left(templine, 1) = "<" Then
+                        doWhichMethod(Trim(templine), sender)
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    Else
+                        outputFile.close()
+                        outputFile = Nothing
+                        Exit Sub
+                    End If
+                Else
+                    If UCase(Strings.Left(Trim(templine), 21)) = "MO               CELL" Then
+                        templine = getNowLine()
+                        If Not Trim(templine) = "NONE" Then
+                            'MO               CELL                CHGR
+                            MO = Trim(Mid(templine, 1, 17))
+                            CELL = Trim(Mid(templine, 18, 20))
+                            CHGR = Trim(Mid(templine, 38, 5))
+                            outputFile.writeLINE(BSCNAME & "," & MO & "," & CELL & "," & CHGR)
+                            temp = BSCNAME & "#" & CELL
+                            If TCP_CELL_MO_DIC.ContainsKey(temp) Then
+                                If Not InStr(TCP_CELL_MO_DIC(temp), BSCNAME & "#" & MO) > 0 Then
+                                    TCP_CELL_MO_DIC(temp) = TCP_CELL_MO_DIC(temp) & "|" & BSCNAME & "#" & MO
+                                End If
+                            Else
+                                TCP_CELL_MO_DIC.Add(temp, BSCNAME & "#" & MO)
+                            End If
+                        End If
+                    ElseIf Strings.Left(templine, 17) = "                 " Then
+                        CELL = Trim(Mid(templine, 18, 20))
+                        CHGR = Trim(Mid(templine, 38, 5))
+                        outputFile.writeLINE(BSCNAME & "," & MO & "," & CELL & "," & CHGR)
+                        temp = BSCNAME & "#" & CELL
+                        If TCP_CELL_MO_DIC.ContainsKey(temp) Then
+                            If Not InStr(TCP_CELL_MO_DIC(temp), BSCNAME & "#" & MO) > 0 Then
+                                TCP_CELL_MO_DIC(temp) = TCP_CELL_MO_DIC(temp) & "|" & BSCNAME & "#" & MO
+                            End If
+                        Else
+                            TCP_CELL_MO_DIC.Add(temp, BSCNAME & "#" & MO)
+                        End If
+                    ElseIf Trim(Mid(templine, 1, 10)) <> "" And InStr(Trim(Mid(templine, 1, 10)), "-") And Trim(templine) <> "TG TO CHANNEL GROUP CONNECTION DATA" And Trim(templine) <> "RADIO X-CEIVER ADMINISTRATION" Then
+                        MO = Trim(Mid(templine, 1, 17))
+                        CELL = Trim(Mid(templine, 18, 20))
+                        CHGR = Trim(Mid(templine, 38, 5))
+                        temp = BSCNAME & "#" & Trim(Mid(templine, 18, 20))
+                        If TCP_CELL_MO_DIC.ContainsKey(temp) Then
+                            If Not InStr(TCP_CELL_MO_DIC(temp), BSCNAME & "#" & MO) > 0 Then
+                                TCP_CELL_MO_DIC(temp) = TCP_CELL_MO_DIC(temp) & "|" & BSCNAME & "#" & MO
+                            End If
+                        Else
+                            TCP_CELL_MO_DIC.Add(temp, BSCNAME & "#" & MO)
+                        End If
+                        outputFile.writeLINE(BSCNAME & "," & MO & "," & CELL & "," & CHGR)
+                    End If
+                End If
+            End If
+        Loop
+        outputFile.CLOSE()
+        outputFile = Nothing
+
+    End Sub
     Private sub doRXTCP_RXOTG(sender As Object)
         Dim outputFile As Object
         Dim filepath As String
